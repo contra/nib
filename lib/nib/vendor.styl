@@ -183,16 +183,6 @@ filter()
   vendor('filter', arguments)
 
 /*
- * Blur with conditional IE support.
- */
-
-blur(radius)
-  vendor('filter', 'blur(%s)' % radius)
-
-  if support-for-ie
-    filter: '"progid:DXImageTransform.Microsoft.Blur(PixelRadius=%d)"' % radius
-
-/*
  * Vendor "touch-callout" support.
  */
 
