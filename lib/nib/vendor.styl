@@ -176,6 +176,44 @@ background-size()
   vendor('background-size', arguments, only: webkit moz official)
 
 /*
+ * Vendor "filter" support.
+ */
+
+filter()
+  vendor('filter', arguments)
+
+/*
+ * Blur with conditional IE support.
+ */
+
+blur(radius)
+  vendor('filter', 'blur(%s)' % radius)
+
+  if support-for-ie
+    filter: '"progid:DXImageTransform.Microsoft.Blur(PixelRadius=%d)"' % radius
+
+/*
+ * Vendor "touch-callout" support.
+ */
+
+touch-callout()
+  vendor('touch-callout', arguments, only: webkit official)
+
+/*
+ * Vendor "tap-highlight-color" support.
+ */
+
+tap-highlight-color()
+  vendor('tap-highlight-color', arguments, only: webkit official)
+
+/*
+ * Vendor "text-stroke" support, , -webkit- for chrome, safari, opera
+ */
+
+text-stroke()
+  vendor('text-stroke', arguments, only: official webkit)
+
+/*
  * Vendor "transform" support.
  */
 
@@ -186,7 +224,7 @@ transform()
  * Vendor "transform-origin" support.
  */
 transform-origin()
-    vendor('transform-origin', arguments)
+  vendor('transform-origin', arguments)
 
 /*
  * Vendor "transform-style" support.
@@ -347,7 +385,6 @@ box-direction()
 animation()
   vendor('animation', arguments)
 
-
 /*
  * Vendor "animation-name" support.
  */
@@ -450,6 +487,10 @@ text-size-adjust()
  */
 font-smoothing()
   vendor('font-smoothing', arguments, only: webkit)
+
+  // handle -moz-osx-font-smoothing
+  if arguments[0] == antialiased
+    -moz-osx-font-smoothing: grayscale
 
 /*
  * Helper for border-radius().
